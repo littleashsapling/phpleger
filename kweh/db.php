@@ -1,7 +1,7 @@
 <?php
 
 $dbHost = "localhost";
-$dbName = "khew";
+$dbName = "kweh";
 $dbUser = "root";
  
 $con = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser);
