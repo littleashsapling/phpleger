@@ -43,7 +43,10 @@ function authError($msg = "Bad Credentials, Please try again!")
   setcookie("authError", $msg, time() + 3);
 }
 
-
+function setStatusMessage($msg = "")
+{
+  setcookie("statusMsg", $msg, time() + 3);
+}
 //all my functions
 function register(){
 //registers user
@@ -67,7 +70,7 @@ global $con;
 
   $stm = $con->prepare($query);
 
-  $stm->bindParam(:"uemail", $useremail);
+  $stm->bindParam(":uemail", $useremail);
   $stm->bindParam(":uname", $username);
   $stm->bindParam(":pword", $hashedPassword);
 
@@ -134,28 +137,131 @@ function loginSuccess($user){
 
   // session stuff
   session_start();
-  $_SESSION['userId'] = $user['id'];
+  $_SESSION['userid'] = $user['id'];
   $_SESSION['username'] = $user['username'];
 }
 
 function logout(){
 //logs user out
+  session_start();
+  session_destroy();
+  redirect("index.php");
 }
 
 function addKweh(){
-//adds post, requires img
+//adds post, requires img?
+session_start();
+  $loggedIn = $_SESSION['userid'] ?? false;
+  $content = $_POST['content'] ?? false;
+
+  if (!$loggedIn || !$content) {
+    redirect("posts.php");
+    setStatusMessage("Missing parameters");
+    return;
+  }
+
+  global $con;
+
+  $query = <<<QUERY
+  INSERT INTO post (content, userid, postedon) 
+  VALUE (:content , :uid, NOW())
+  QUERY;
+
+  $stm = $con->prepare($query);
+
+  $stm->bindParam(":content", $content);
+  $stm->bindParam(":uid", $_SESSION['userid']);
+
+  if ($stm->execute()) {
+    setStatusMessage("Added post");
+  } else {
+    setStatusMessage("Failed to add post");
+  }
+  redirect("kweh.php");
 }
 
 function uploadImg(){
 //uploads img
+session_start();
+  $loggedIn = $_SESSION['userId'] ?? false;
+  $title = $_POST['title'] ?? false;
+  $newFile = $_FILES['newFile'] ?? false;
+
+  if (!$loggedIn || !$title || !$newFile) {
+    redirect("gallery.php");
+    return;
+  }
+
+  $storedName = time() . "_" . rand(1000, 9999);
+
+  global $con;
+
+  $query = <<<QUERY
+  INSERT INTO uploaded_image (userid, filename, storedname, title, uploadedon) 
+  VALUE (:userid, :filename, :storedname, :title, NOW())
+  QUERY;
+
+  $stm = $con->prepare($query);
+
+  $stm->bindParam(":userid", $_SESSION['userId']);
+  $stm->bindParam(":filename", $newFile['name']);
+  $stm->bindParam(":storedname", $storedName);
+  $stm->bindParam(":title", $title);
+
+  if (!$stm->execute()) {
+    redirect("gallery.php");
+    setStatusMessage("Upload failed");
+    return;
+  }
+
+  move_uploaded_file($newFile['tmp_name'], GALLERY_DIR . $storedName);
+
+  redirect("gallery.php");
+  setStatusMessage("Upload Success");
 }
 
 function deleteImg(){
 //delete img
+session_start();
+  $userId = $_SESSION['userId'] ?? false;
+  $uploadId = $_POST['uploadId'] ?? false;
+
+  if (!$userId || !$uploadId) {
+    redirect("gallery.php");
+    return;
+  }
+
+  global $con;
+
+  $query = <<<QUERY
+  DELETE FROM image WHERE id = :upid AND userid = :userid;
+  QUERY;
+
+  $stm = $con->prepare($query);
+
+  $stm->bindParam(":userid", $_SESSION['userId']);
+  $stm->bindParam(":upid", $uploadId);
+
+  if ($stm->execute()) {
+    setStatusMessage("Upload deleted");
+  } else {
+    setStatusMessage("Upload delete failed. Something went wrong.");
+  }
+  redirect("gallery.php");
+
 }
 
 function deleteKweh(){
 //delete post
+
+session_start();
+  $userId = $_SESSION['userId'] ?? false;
+  $postId = $_POST['postId'] ?? false;
+
+  if (!$userId || !$postId) {
+    redirect("kweh.php");
+    setStatusMessage("Missing parameters");
+    return;
 }
 function comment(){
 //comment on post
