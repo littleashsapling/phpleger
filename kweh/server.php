@@ -48,9 +48,10 @@ function setStatusMessage($msg = "")
   setcookie("statusMsg", $msg, time() + 3);
 }
 //all my functions
+
 function register(){
-//registers user
-$useremail = $_POST['useremail']?? false;
+  //registers user
+  $useremail = $_POST['useremail']?? false;
   $username = $_POST['username'] ?? false;
   $password = $_POST['password'] ?? false;
 
@@ -132,7 +133,7 @@ function login(){
 }
 
 function loginSuccess($user){
-//login success
+  //login success
   redirect("posts.php");
 
   // session stuff
@@ -142,15 +143,15 @@ function loginSuccess($user){
 }
 
 function logout(){
-//logs user out
+  //logs user out
   session_start();
   session_destroy();
   redirect("index.php");
 }
 
 function addKweh(){
-//adds post, requires img?
-session_start();
+  //adds post, requires img?
+  session_start();
   $loggedIn = $_SESSION['userid'] ?? false;
   $content = $_POST['content'] ?? false;
 
@@ -181,8 +182,8 @@ session_start();
 }
 
 function uploadImg(){
-//uploads img
-session_start();
+  //uploads img 
+  session_start();
   $loggedIn = $_SESSION['userId'] ?? false;
   $title = $_POST['title'] ?? false;
   $newFile = $_FILES['newFile'] ?? false;
@@ -221,8 +222,8 @@ session_start();
 }
 
 function deleteImg(){
-//delete img
-session_start();
+  //delete img
+  session_start();
   $userId = $_SESSION['userId'] ?? false;
   $uploadId = $_POST['uploadId'] ?? false;
 
@@ -262,13 +263,15 @@ session_start();
     redirect("kweh.php");
     setStatusMessage("Missing parameters");
     return;
+  }
 }
+
 function comment(){
-//comment on post
+  //comment on post
 }
 
 function helloUser(){
-//greets username in navbar-would be cool
-echo str_replace('world', $username, 'Hello world!');
+  //greets username in navbar-would be cool
+  echo str_replace('world', $username, 'Hello world!');
 }
 ?>
