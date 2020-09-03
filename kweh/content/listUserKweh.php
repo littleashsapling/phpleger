@@ -3,7 +3,7 @@
 
   if (!$loggedIn) return;
 
-  require 'db.php';
+  require __DIR__ . '/../db.php';
 
   $query = <<<JOINEDPOSTS
   SELECT 

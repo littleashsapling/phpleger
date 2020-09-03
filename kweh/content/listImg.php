@@ -3,7 +3,7 @@
 
   define("GALLERY_DIR", "gallery/");
 
-  require 'db.php';
+  require __DIR__ . '/../db.php';
 
   $query = <<<JOINEDUPLOADS
   SELECT 

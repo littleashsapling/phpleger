@@ -79,7 +79,6 @@ global $con;
     loginSuccess([
       'id' => $con->lastInsertId(),
       'username' => $username,
-      'admin' => false
     ]);
   } else {
     redirect("index.php");
