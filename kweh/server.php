@@ -138,7 +138,7 @@ function loginSuccess($user){
 
   // session stuff
   session_start();
-  $_SESSION['userid'] = $user['id'];
+  $_SESSION['userId'] = $user['id'];
   $_SESSION['username'] = $user['username'];
 }
 
@@ -164,7 +164,7 @@ function addKweh(){
   global $con;
 
   $query = <<<QUERY
-  INSERT INTO post (content, userid, postedon) 
+  INSERT INTO post (content, userId, postedOn) 
   VALUE (:content , :uid, NOW())
   QUERY;
 
@@ -198,7 +198,7 @@ function uploadImg(){
   global $con;
 
   $query = <<<QUERY
-  INSERT INTO uploaded_image (userid, filename, storedname, title, uploadedon) 
+  INSERT INTO image (userid, filename, storedname, title, uploadedOn) 
   VALUE (:userid, :filename, :storedname, :title, NOW())
   QUERY;
 
@@ -235,13 +235,13 @@ function deleteImg(){
   global $con;
 
   $query = <<<QUERY
-  DELETE FROM image WHERE id = :upid AND userid = :userid;
+  DELETE FROM image WHERE id = :postId AND userId = :userId;
   QUERY;
 
   $stm = $con->prepare($query);
 
-  $stm->bindParam(":userid", $_SESSION['userId']);
-  $stm->bindParam(":upid", $uploadId);
+  $stm->bindParam(":userId", $_SESSION['userId']);
+  $stm->bindParam(":postId", $uploadId);
 
   if ($stm->execute()) {
     setStatusMessage("Upload deleted");
