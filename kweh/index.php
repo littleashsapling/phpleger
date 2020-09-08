@@ -1,15 +1,23 @@
 <html>
 
 <head>
-    <title>Kweh!</title>
+    <?php require 'components/header.php'; ?>
 </head>
 
 <body>
-    <?php
-            echo "<p>Hello World!</p>";
-        ?>
+    <?php require "components/navbar.php" ?>
+    <title>Kweh!</title>
+    <div class="center">
+        <div class="contain">
+            <?php require "content/listPosts.php"; ?>
+            <?php require "content/listUploads.php"; ?>
+        </div>
+    </div>
     <a href="login.php"> Click here to login <br />
         <a href="register.php"> Click here to register <br />
 </body>
+<footer>
+    <?php require "components/footer.php"?>
+</footer>
 
 </html>

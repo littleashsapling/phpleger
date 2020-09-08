@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+    <?php require 'components/header.php'; ?>
+</head>
+
 <body>
+    <?php require "components/navbar.php" ?>
     <h1>Upload Image</h1>
     <form action="server.php" method="POST" enctype="multipart/form-data" class="center">
-        <input name="action" value="uploadFile" type="hidden" />
+        <input name="action" value="uploadImg" type="hidden" />
         <input name="newFile" type="file" required />
         <input name="title" required />
         <button>Upload</button>
@@ -20,5 +25,9 @@
     }
     </script>
 </body>
+
+<footer>
+    <?php require "components/footer.php"?>
+</footer>
 
 </html>

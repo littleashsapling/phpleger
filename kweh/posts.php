@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+    <?php require 'components/header.php'; ?>
+</head>
+
 <body>
+    <?php require "components/navbar.php" ?>
     <h1>Posts</h1>
     <div id="status" class="center"></div>
     <?php
@@ -23,5 +28,8 @@
     }
     </script>
 </body>
+<footer>
+    <?php require "components/footer.php"?>
+</footer>
 
 </html>

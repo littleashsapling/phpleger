@@ -1,6 +1,6 @@
 <?php
 
-define('GALLERY_DIR', 'gallery/'); //why is it angry, precious?
+define('GALLERY_DIR', 'gallery/');
 
 require 'db.php'; //fixed
 
@@ -19,16 +19,16 @@ switch ($action) {
     logout();
     break;
   case 'addKweh':
-    addPost();
+    addKweh();
     break;
   case 'deleteKweh':
-    deletePost();
+    deleteKweh();
     break;
   case 'uploadImg':
-    uploadFile();
+    uploadImg();
     break;
   case 'deleteImg':
-    deleteUpload();
+    deleteImg();
     break;
     case 'comment':
       comment();
