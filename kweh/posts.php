@@ -16,7 +16,7 @@
       <input name="action" value="addKweh" type="hidden" />
       <textarea name="content" cols="60" rows="5"></textarea>
       <br>
-      <button>Submit/button>
+      <button>Submit</button>
     </form>
     NEWPOST;
   }

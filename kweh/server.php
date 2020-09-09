@@ -4,6 +4,10 @@ define('GALLERY_DIR', 'gallery/');
 
 require 'db.php'; //fixed
 
+function redirect($url)
+{
+  header("Location: $url");
+}
 //action dispatcher - built
 
 $action = $_POST['action'] ?? false;
@@ -51,7 +55,7 @@ function setStatusMessage($msg = "")
 
 function register(){
   //registers user
-  $useremail = $_POST['useremail']?? false;
+  $useremail = $_POST['email']?? false;
   $username = $_POST['username'] ?? false;
   $password = $_POST['password'] ?? false;
 
@@ -73,7 +77,7 @@ global $con;
 
   $stm->bindParam(":uemail", $useremail);
   $stm->bindParam(":uname", $username);
-  $stm->bindParam(":pword", $hashedPassword);
+  $stm->bindParam(":pass", $hashedPassword);
 
   if ($stm->execute()) {
     loginSuccess([
@@ -151,7 +155,7 @@ function logout(){
 function addKweh(){
   //adds post, requires img?
   session_start();
-  $loggedIn = $_SESSION['userid'] ?? false;
+  $loggedIn = $_SESSION['userId'] ?? false;
   $content = $_POST['content'] ?? false;
 
   if (!$loggedIn || !$content) {
@@ -170,14 +174,14 @@ function addKweh(){
   $stm = $con->prepare($query);
 
   $stm->bindParam(":content", $content);
-  $stm->bindParam(":uid", $_SESSION['userid']);
+  $stm->bindParam(":uid", $_SESSION['userId']);
 
   if ($stm->execute()) {
     setStatusMessage("Added post");
   } else {
     setStatusMessage("Failed to add post");
   }
-  redirect("kweh.php");
+  redirect("posts.php");
 }
 
 function uploadImg(){
@@ -188,7 +192,7 @@ function uploadImg(){
   $newFile = $_FILES['newFile'] ?? false;
 
   if (!$loggedIn || !$title || !$newFile) {
-    redirect("gallery.php");
+    redirect("upload.php");
     return;
   }
 
@@ -216,7 +220,7 @@ function uploadImg(){
 
   move_uploaded_file($newFile['tmp_name'], GALLERY_DIR . $storedName);
 
-  redirect("gallery.php");
+  redirect("upload.php");
   setStatusMessage("Upload Success");
 }
 
@@ -227,7 +231,7 @@ function deleteImg(){
   $uploadId = $_POST['uploadId'] ?? false;
 
   if (!$userId || !$uploadId) {
-    redirect("gallery.php");
+    redirect("upload.php");
     return;
   }
 
@@ -259,7 +263,7 @@ session_start();
   $postId = $_POST['postId'] ?? false;
 
   if (!$userId || !$postId) {
-    redirect("kweh.php");
+    redirect("posts.php");
     setStatusMessage("Missing parameters");
     return;
   }
@@ -267,10 +271,5 @@ session_start();
 
 function comment(){
   //comment on post
-}
-
-function helloUser(){
-  //greets username in navbar-would be cool
-  echo str_replace('world', $username, 'Hello world!');
 }
 ?>

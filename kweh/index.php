@@ -9,8 +9,8 @@
     <title>Kweh!</title>
     <div class="center">
         <div class="contain">
-            <?php require "content/listPosts.php"; ?>
-            <?php require "content/listUploads.php"; ?>
+            <?php require "content/listKweh.php"; ?>
+            <?php require "content/listImg.php"; ?>
         </div>
     </div>
     <a href="login.php"> Click here to login <br />

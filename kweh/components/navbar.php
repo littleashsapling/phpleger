@@ -6,9 +6,6 @@
     echo '<a href="posts.php">Posts</a>';
     echo '<a href="upload.php">Upload</a>';
   }
-  if ($loggedIn && $isAdmin) {
-    echo '<a href="admin.php">Admin</a>';
-  }
 
   ?>
     <div id="loginbox">
