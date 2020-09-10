@@ -17,7 +17,7 @@
   FROM image
   INNER JOIN user
     ON image.userId=user.id
-  WHERE image.userId=:user_id
+  WHERE image.userId=:userId
   ORDER BY image.uploadedOn DESC
   JOINEDUPLOADS;
 
@@ -28,7 +28,7 @@
   $stm->execute();
 
   while ($row = $stm->fetch(PDO::FETCH_ASSOC)) {
-    $uploadPath = GALLERY_DIR . $row['storedNname'];
+    $uploadPath = GALLERY_DIR . $row['storedName'];
     echo <<<EACHPOST
     <li>
       <form action="server.php" method="POST">

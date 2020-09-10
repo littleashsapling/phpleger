@@ -25,7 +25,7 @@ require __DIR__ . '/../db.php';
       <h3>{$row['content']}</h3>
       <div>
         {$row['username']}
-        <span>{$row['posted_on']}</span>
+        <span>{$row['postedOn']}</span>
       </div>
     </li>
     EACHPOST;

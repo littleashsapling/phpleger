@@ -34,7 +34,7 @@
           <input name="password" type="password" />
           <input name="action" value="login" type="hidden" />
           <button onclick="login()">Login</button>
-          <button onclick="register()">Register</button>
+          <a href="register.php">Register<br />
         </form>
         NOTLOGGEDIN;
       }

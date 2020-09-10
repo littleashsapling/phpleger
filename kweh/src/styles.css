@@ -1,13 +1,13 @@
 body,
 html {
-  background-color: #333;
+  background-color: #d9b554;
   color: #fff;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 img {
-  max-width: 100%;
+  max-width: 75%;
 }
 
 .center {
@@ -19,13 +19,13 @@ button {
   font-weight: bold;
   text-transform: uppercase;
   border-radius: 3px;
-  border: 1px solid #041;
-  background-color: #162;
+  border: 1px solid transparent;
+  background-color: #fac62b;
   padding: 6px 14px;
 }
-
+/*nav bar*/
 nav {
-  background-color: #444;
+  background-color: #3f3329;
   padding: 7px 10px;
 }
 
@@ -37,10 +37,6 @@ nav a {
 
 nav a:hover {
   background-color: #567;
-}
-
-h1 {
-  text-align: center;
 }
 
 div#loginbox {
@@ -64,7 +60,7 @@ div#currentUser {
 
 div#loginForm {
   display: none;
-  background-color: #444;
+  background-color: #3f3329;
   padding: 5px;
 }
 
@@ -84,17 +80,20 @@ div#loginStatus {
   color: #e52;
 }
 
+h1 {
+  text-align: center;
+}
+/*posts*/
 ul.card-list {
   padding: 10px;
   list-style-type: none;
 }
 
 ul.card-list li {
-  background-color: #444;
+  background-color: #3f3329;
   padding: 10px;
   margin: 4px 4px 12px 4px;
   position: relative;
-  box-shadow: 0 0 15px #222;
 }
 
 ul.card-list li div {

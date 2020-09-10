@@ -26,8 +26,4 @@
     </script>
 </body>
 
-<footer>
-    <?php require "components/footer.php"?>
-</footer>
-
 </html>

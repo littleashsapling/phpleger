@@ -13,11 +13,20 @@
             <?php require "content/listImg.php"; ?>
         </div>
     </div>
-    <a href="login.php"> Click here to login <br />
+    <?php
+    if($loggedIn){
+        //no div
+    }else{
+        echo <<<NOTLOGGEDIN
+        <div>
+        <a href="login.php"> Click here to login <br />
         <a href="register.php"> Click here to register <br />
+    </div>
+    NOTLOGGEDIN;
+    }
+    ?>
+
+
 </body>
-<footer>
-    <?php require "components/footer.php"?>
-</footer>
 
 </html>

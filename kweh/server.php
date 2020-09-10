@@ -201,7 +201,7 @@ function uploadImg(){
   global $con;
 
   $query = <<<QUERY
-  INSERT INTO image (userid, filename, storedname, title, uploadedOn) 
+  INSERT INTO image (userId, filename, storedName, title, uploadedOn) 
   VALUE (:userid, :filename, :storedname, :title, NOW())
   QUERY;
 
@@ -213,7 +213,7 @@ function uploadImg(){
   $stm->bindParam(":title", $title);
 
   if (!$stm->execute()) {
-    redirect("gallery.php");
+    redirect("upload.php");
     setStatusMessage("Upload failed");
     return;
   }
@@ -257,7 +257,6 @@ function deleteImg(){
 
 function deleteKweh(){
 //delete post
-
 session_start();
   $userId = $_SESSION['userId'] ?? false;
   $postId = $_POST['postId'] ?? false;
@@ -267,6 +266,23 @@ session_start();
     setStatusMessage("Missing parameters");
     return;
   }
+  global $con;
+
+  $query = <<<QUERY
+  DELETE FROM post WHERE id = :postId AND userId = :userId;
+  QUERY;
+
+  $stm = $con->prepare($query);
+
+  $stm->bindParam(":userId", $_SESSION['userId']);
+  $stm->bindParam(":postId", $postId);
+
+  if ($stm->execute()) {
+    setStatusMessage("Post deleted");
+  } else {
+    setStatusMessage("Post delete failed. Something went wrong.");
+  }
+  redirect("posts.php");
 }
 
 function comment(){
