@@ -1,5 +1,5 @@
 <nav>
-    <a href="index.php">Kweh</a>
+    <a href="index.php" id="icon"><img src="src/img/chocoboiconmenu.png" alt="chocobo icon"></a>
     <?php
 
   if ($loggedIn) {
@@ -14,7 +14,7 @@
       if ($loggedIn) {
         echo $_SESSION['username'];
       } else {
-        echo 'Not Logged In';
+        echo 'Login';
       }
       ?>
         </div>

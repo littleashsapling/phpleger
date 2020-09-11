@@ -2,30 +2,32 @@
 
 <head>
     <?php require 'components/header.php'; ?>
+    <title>Kweh!</title>
 </head>
 
 <body>
     <?php require "components/navbar.php" ?>
-    <title>Kweh!</title>
-    <div class="center">
-        <div class="contain">
-            <?php require "content/listKweh.php"; ?>
-            <?php require "content/listImg.php"; ?>
+    <div class="shading">
+        <h1>Kweh!</h1>
+        <h3>Yours to discover</h3>
+        <div class="center">
+            <div class="contain">
+                <?php require "content/listKweh.php"; ?>
+                <?php require "content/listImg.php"; ?>
+            </div>
         </div>
-    </div>
-    <?php
+        <?php
     if($loggedIn){
         //no div
     }else{
         echo <<<NOTLOGGEDIN
         <div>
-        <a href="login.php"> Click here to login <br />
-        <a href="register.php"> Click here to register <br />
+        <a href="register.php" class="button"> Click here to register </a>
     </div>
     NOTLOGGEDIN;
     }
     ?>
-
+    </div>
 
 </body>
 
