@@ -24,15 +24,24 @@ button {
   background-color: #fac62b;
   padding: 6px 14px;
 }
+button:hover {
+  color: #fac62b;
+  background-color: #3f3329;
+}
 
 .button {
   color: white;
   text-transform: uppercase;
   border-radius: 5px;
-  border: 1px solid #fac62b;
+  border: 1px solid transparent;
   background-color: #fac62b;
-  padding: 6px 14px;
+  padding: 9px 14px;
+  font-weight: bold;
+}
+a:hover {
   text-decoration: none;
+  color: #fac62b;
+  background-color: #3f3329;
 }
 /*nav bar*/
 nav {
@@ -60,7 +69,7 @@ nav a:hover {
 div#loginbox {
   position: absolute;
   top: 0;
-  left: 75%;
+  right: 25%;
 }
 
 div#loginbox input {
@@ -69,20 +78,21 @@ div#loginbox input {
 
 div#currentUser {
   padding: 8px 12px;
-  text-align: center;
+  text-align: right;
   cursor: pointer;
+  font-weight: bold;
   -moz-user-select: none;
   user-select: none;
   -webkit-user-select: none;
   text-transform: capitalize;
   color: #fac62b;
-  font-weight: bold;
 }
 
 div#loginForm {
   display: none;
-  background-color: #3f3329;
+  background-color: #3f3329b7;
   padding: 5px;
+  border-radius: 5px;
 }
 
 div#loginForm.visible {
@@ -90,7 +100,7 @@ div#loginForm.visible {
 }
 
 input {
-  border: 2px solid #3f3329;
+  border: 2px solid transparent;
   border-radius: 3px;
   margin: 5px;
   padding: 4px 12px;

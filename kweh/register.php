@@ -18,7 +18,7 @@
             <input type="password" name="password" required="required" /> <br />
             <input name="action" value="register" type="hidden" />
             <button onclick="register()">Register</button>
-            <a href="index.php">Cancel<br /><br />
+            <a href="index.php" class="button">Cancel</a><br />
         </form>
         <div>
 </body>
